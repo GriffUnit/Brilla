@@ -40,6 +40,25 @@ body {
 
 @layer utilities {
   .header_button {
-    @apply w-full px-4 py-2 md:px-10 lg:px-20 text-white hover:cursor-pointer font-semibold hover:bg-gray-700 rounded-3xl flex flex-row items-center gap-2 justify-center;
+    @apply w-full py-2 max-lg:px-7 max-md:px-5 text-white hover:cursor-pointer font-semibold hover:bg-gray-700 rounded-3xl flex flex-row items-center gap-2 max-lg:gap-1 justify-center max-sm:text-sm max-sm:px-1 px-20;
+  }
+  /*Right Side bar*/
+  .divider {
+    @apply bg-gray-500 w-full mx-auto border-0 h-px;
+  }
+  .rightBar_data {
+    @apply flex flex-row gap-2 items-center hover:text-gray-600 hover:cursor-pointer;
+  }
+  .icon_style {
+    @apply p-1 bg-gray-900 rounded-2xl;
+  }
+
+  /*PostCard*/
+  .postfooter_icon {
+    @apply w-20 hover:bg-gray-600 rounded-xl flex items-center justify-center max-lg:w-6 max-lg:h-6;
+  }
+  /*HoverCard*/
+  .hover_data {
+    @apply font-medium text-lg hover:text-gray-600 hover:cursor-pointer
   }
 }

@@ -38,7 +38,11 @@ const AskPost = ({ title, image }: Props) => {
           className="header_button"
           type="button"
         >
-          <img src={`/${title}.png`} alt={title} className="w-8" />
+          <img
+            src={`/${title}.png`}
+            alt={title}
+            className="w-8 h-8 max-sm:hidden max-lg:w-6 max-lg:h-6"
+          />
           {title}
         </button>
       </div>
@@ -88,7 +92,7 @@ const AskPost = ({ title, image }: Props) => {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block mb-2 text-xl text-white font-bold"
+                      className="block mb-1 text-xl text-white font-bold"
                     >
                       Title
                     </label>
@@ -103,7 +107,7 @@ const AskPost = ({ title, image }: Props) => {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block mb-2 text-xl text-white font-bold"
+                      className="block mb-1 text-xl text-white font-bold"
                     >
                       Category
                     </label>
@@ -111,11 +115,11 @@ const AskPost = ({ title, image }: Props) => {
                       type="text"
                       name="Title"
                       id="name"
-                      className=" border-gray-300  rounded-2xl focus:ring-primary-600 focus:border-gray-600 block p-2.5 text-white placeholder:text-b w-full h-full bg-slate-900 border-0 outline-none mb-5 text-base"
+                      className=" border-gray-300  rounded-2xl focus:ring-primary-600 focus:border-gray-600 block p-2.5 text-white placeholder:text-b w-full h-full bg-slate-900 border-0 outline-none mb-4 text-base"
                       placeholder="e.g. Physics, Electrical Engineering,...."
                     />
                   </div>
-                  <p className="mt-2 font-bold">Upload an Image</p>
+                  <p className="mt-2 text-xl font-bold">Upload an Image</p>
 
                   <div className="App">
                     <ImageUploading
@@ -177,15 +181,17 @@ const AskPost = ({ title, image }: Props) => {
                   <div className="sm:col-span-2">
                     <label
                       htmlFor="description"
-                      className="block mb-2 text-sm  text-white mt-3 font-bold"
+                      className="block mb-2 text-xl font-bold text-white mt-3"
                     >
                       Description
                     </label>
                     <textarea
                       id="description"
                       rows={4}
-                      className="block p-2.5 w-full text-sm text-white bg-gray-900 border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 rounded-xl"
-                      placeholder="Write product description here"
+                      className="block p-2.5 w-full text-sm text-white bg-gray-900 border border-slate-700 focus:ring-primary-500 focus:border-primary-500  placeholder-gray-400 dark:text-white  rounded-xl min-h-32"
+                      placeholder={`Write your ${
+                        title ? "question" : "post"
+                      } here`}
                     ></textarea>
                   </div>
                 </div>
