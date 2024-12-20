@@ -1,6 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 import ImageUploading, { ImageListType } from "react-images-uploading";
+import MDEditor from "@uiw/react-md-editor";
+import { error } from "console";
 
 interface Props {
   title?: string;
@@ -10,8 +12,24 @@ interface Props {
 const AskPost = ({ title, image }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [images, setImages] = React.useState([]);
-  const maxNumber = 69;
+  const maxNumber = 10;
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [description, setDescription] = React.useState("");
 
+  const handleFormSubmit = (prevState: any, formData: FormData) => {
+    try {
+      const formValues = {
+        title: formData.get("title") as string,
+        category: formData.get("category") as string,
+        image: formData.get("image") as File,
+        description,
+      };
+    } catch (error) {}
+  };
+  const [state, formAction, isPending] = useActionState(handleFormSubmit, {
+    error: "",
+    status: "INITIAL",
+  });
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -87,14 +105,14 @@ const AskPost = ({ title, image }: Props) => {
                 </button>
               </div>
               {/* Modal body */}
-              <form action="#">
+              <form action={() => {}}>
                 <div className=" gap-4 mb-4 sm:grid-cols-2">
                   <div>
                     <label
                       htmlFor="name"
                       className="block mb-1 text-xl text-white font-bold"
                     >
-                      Title
+                      Topic
                     </label>
                     <input
                       type="text"
@@ -102,7 +120,11 @@ const AskPost = ({ title, image }: Props) => {
                       id="name"
                       className=" border-gray-300 text-sm  focus:ring-primary-600 focus:border-primary-600 block p-2.5 text-white placeholder:text-b w-full h-full bg-slate-900 border-0 outline-none mb-5 rounded-2xl"
                       placeholder="e.g. Calculus, Thermodynamics,...."
+                      required
                     />
+                    {errors.topic && (
+                      <p className="text-red-500 mt-1">{errors.topic}</p>
+                    )}
                   </div>
                   <div>
                     <label
@@ -116,12 +138,15 @@ const AskPost = ({ title, image }: Props) => {
                       name="Title"
                       id="name"
                       className=" border-gray-300  rounded-2xl focus:ring-primary-600 focus:border-gray-600 block p-2.5 text-white placeholder:text-b w-full h-full bg-slate-900 border-0 outline-none mb-4 text-base"
-                      placeholder="e.g. Physics, Electrical Engineering,...."
+                      placeholder="e.g. Mathematics, Electrical Engineering,...."
                     />
+                    {errors.category && (
+                      <p className="text-red-500 mt-1">{errors.category}</p>
+                    )}
                   </div>
                   <p className="mt-2 text-xl font-bold">Upload an Image</p>
 
-                  <div className="App">
+                  <div>
                     <ImageUploading
                       multiple
                       value={images}
@@ -138,12 +163,15 @@ const AskPost = ({ title, image }: Props) => {
                         dragProps,
                       }) => (
                         <div>
-                          <button
-                            className={`w-full min-h-64 bg-slate-900 border-2 border-slate-700 rounded-3xl text-lg px-5 flex flex-row items-center max-md:max-w-[400px] hover:bg-slate-700 justify-center mb-2 ${
-                              isDragging ? "bg-gray-400" : ""
-                            }`}
-                            onClick={onImageUpload}
+                          <input
+                            type="file"
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                            onChange={onImageUpload}
                             {...dragProps}
+                            accept="image/*"
+                          />
+                          <button
+                            className={`w-full min-h-52 bg-slate-900 border-2 border-slate-700 rounded-3xl text-lg px-5 flex flex-row items-center max-md:max-w-[400px] hover:bg-slate-700 justify-center mb-2 ${isDragging ? "bg-gray-400" : ""}`}
                           >
                             <div className="gap-2 text-gray-500 flex items-center flex-col">
                               <img src="/upload.png" className="w-12 h-12" />
@@ -154,12 +182,13 @@ const AskPost = ({ title, image }: Props) => {
                               SVG, PNG, JPG or JPEG
                             </div>
                           </button>
+
                           <button
                             onClick={onImageRemoveAll}
-                            className="mt-2 px-2 py-2 bg-red-800 rounded-2xl transition 
-                            hover:text-slate-500 mb-3"
+                            className="mt-2 px-2 py-4  bg-slate-700 rounded-2xl transition 
+                             hover:bg-red-800 mb-3"
                           >
-                            Remove all images
+                            Remove image
                           </button>
                           {imageList.map((image, index) => (
                             <div key={index} className="image-item">
@@ -185,19 +214,45 @@ const AskPost = ({ title, image }: Props) => {
                     >
                       Description
                     </label>
-                    <textarea
+                    {/* <textarea
                       id="description"
                       rows={4}
-                      className="block p-2.5 w-full text-sm text-white bg-gray-900 border border-slate-700 focus:ring-primary-500 focus:border-primary-500  placeholder-gray-400 dark:text-white  rounded-xl min-h-32"
+                      className="block p-2.5 w-full text-sm text-white bg-gray-900 border border-slate-700 focus:ring-primary-500 focus:border-primary-500  placeholder-gray-400 rounded-xl min-h-44"
                       placeholder={`Write your ${
                         title ? "question" : "post"
                       } here`}
-                    ></textarea>
+                      required
+                    ></textarea> */}
+                    <MDEditor
+                      value={description}
+                      onChange={(value) => setDescription(value as string)}
+                      style={
+                        {
+                          "--tw-bg-opacity": 1,
+                          backgroundColor:
+                            "rgb(17 24 39 / var(--tw-bg-opacity))",
+                          borderRadius: "0.75rem",
+                          overflow: "hidden",
+                          minheight: "13rem",
+                        } as any
+                      }
+                      textareaProps={{
+                        placeholder: `Write your ${title ? "question" : "post"} here`,
+                      }}
+                      previewOptions={{
+                        disallowedElements: ["style"],
+                      }}
+                    />
+                    {errors.description && (
+                      <p className="text-red-500 mt-1">{errors.description}</p>
+                    )}
                   </div>
                 </div>
                 <button
                   type="submit"
-                  className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  className="text-white inline-flex items-center bg-red-800 focus:ring-4 focus:outline-none transition 
+                            hover:text-slate-500 focus:ring-primary-300 font-medium rounded-2xl text-sm px-6 py-2.5 text-center"
+                  disabled={isPending}
                 >
                   <svg
                     className="mr-1 -ml-1 w-6 h-6"
@@ -211,7 +266,11 @@ const AskPost = ({ title, image }: Props) => {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                  {title}
+                  {isPending && title === "Ask"
+                    ? "Asking..."
+                    : isPending && title === "Post"
+                      ? "Posting..."
+                      : title}
                 </button>
               </form>
             </div>

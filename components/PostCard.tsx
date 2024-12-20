@@ -6,6 +6,7 @@ import ExpandableText from "./ExpandableText";
 import PostImage from "./PostImage";
 import { urlFor } from "@/sanity/lib/image";
 import { Author, Question } from "@/sanity/types";
+import View from "./Views";
 
 export type PostTypeCard = Omit<Question, "author"> & { author?: Author };
 
@@ -66,7 +67,11 @@ const PostCard = ({ post }: { post: PostTypeCard }) => {
 
         <PostImage image={urlFor(image).url()} />
       </div>
-      <PostCardFooter />
+      <div className="mt-3">
+        <PostCardFooter />
+        {/*         <View id={_id} />
+         */}{" "}
+      </div>
     </li>
   );
 };
