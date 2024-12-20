@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const PostImage = ({ image }: { image: string }) => {
+const PostImage = ({ image }: { image?: string }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const dimensions = isExpanded ? "h-auto" : "max-h-[600px]";
   return (

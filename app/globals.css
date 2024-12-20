@@ -59,6 +59,6 @@ body {
   }
   /*HoverCard*/
   .hover_data {
-    @apply font-medium text-lg hover:text-gray-600 hover:cursor-pointer
+    @apply font-medium text-lg hover:text-gray-600 hover:cursor-pointer;
   }
 }

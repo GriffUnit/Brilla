@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predev": "npm run typegen",
+    "prebuild": "npm run typegen",
+    "typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
@@ -22,6 +25,7 @@
     "clsx": "^2.1.1",
     "flowbite-react": "^0.10.2",
     "lucide-react": "^0.468.0",
+    "markdown-it": "^14.1.0",
     "next": "15.0.4",
     "next-auth": "^5.0.0-beta.25",
     "next-sanity": "^9.8.3-canary.1",
@@ -29,8 +33,10 @@
     "react-dom": "^19.0.0",
     "react-images-uploading": "^3.1.7",
     "sanity": "^3.67.1",
+    "sanity-plugin-markdown": "^5.0.0",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.5",
+    "server-only": "^0.0.1",
     "styled-components": "^6.1.13",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
@@ -40,6 +46,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

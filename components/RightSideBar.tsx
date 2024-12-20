@@ -1,46 +1,51 @@
 import { signOut } from "@/auth";
-import { LogOut } from "lucide-react";
+import { urlFor } from "@/sanity/lib/image";
+import { Author } from "@/sanity/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const RightSideBar = ({ user }: { user: userTypeCard }) => {
-  const {
-    _id,
-    name,
-    username,
-    image,
-    backgroundImage,
-    questions,
-    answers,
-    posts,
-    views,
-    bio,
-    author,
-  } = user;
+const RightSideBar = ({ user }: { user: Author }) => {
   return (
     <>
       <div className="top-0 w-full bg-gray-800 h-auto rounded-xl flex flex-col justify-center border border-gray-700">
-        <Link href={`/user/${author?._id}`}>
-          <img
-            src={backgroundImage}
-            className="w-full h-24 rounded-t-xl object-cover object-bottom"
-          />
-          <div className="flex justify-center transform -translate-y-7 ">
-            <Image
-              src={image}
-              alt={username}
-              width={80}
-              height={80}
-              className="rounded-2xl border-4 border-gray-800 shadow-lg"
+        <Link href={`/user/${user?._id}`}>
+          {user?.backgroundImage ? (
+            <img
+              src={urlFor(user.backgroundImage).url()}
+              className="w-full h-24 rounded-t-xl object-cover object-bottom"
             />
+          ) : (
+            <img
+              src="/background_placeholder.jpeg"
+              className="w-full h-24 rounded-t-xl object-cover object-bottom"
+            />
+          )}
+          <div className="flex justify-center transform -translate-y-7 ">
+            {user?.image ? (
+              <Image
+                src={urlFor(user.image).url()}
+                alt={user?.username || "default user image"}
+                width={80}
+                height={80}
+                className="rounded-2xl border-4 border-gray-800 shadow-lg"
+              />
+            ) : (
+              <Image
+                src="User_placeholder.jpeg"
+                alt="placeholder"
+                width={80}
+                height={80}
+                className="rounded-2xl border-4 border-gray-800 shadow-lg"
+              />
+            )}
           </div>
         </Link>
         <div className=" flex gap-1 flex-col justify-center items-center">
           <h3 className="text-center text-2xl font-semibold hover:underline">
-            {username}
+            {user?.username}
           </h3>
-          <p className="text-center text-lg text-gray-500">{bio}</p>
+          <p className="text-center text-lg text-gray-500">{user?.bio}</p>
           <form
             action={async () => {
               "use server";
@@ -66,7 +71,9 @@ const RightSideBar = ({ user }: { user: userTypeCard }) => {
               height={34}
               className="icon_style"
             />
-            <p className="font-medium text-lg">Asked {questions} Questions</p>
+            <p className="font-medium text-lg">
+              Asked {user?.totalQuestions} Questions
+            </p>
           </div>
           <hr className="divider" />
 
@@ -78,9 +85,11 @@ const RightSideBar = ({ user }: { user: userTypeCard }) => {
               height={34}
               className="icon_style"
             />
-            <p className="font-medium text-lg">Answered {answers} questions</p>
+            <p className="font-medium text-lg">
+              Answered {user?.totalAnswers} questions
+            </p>
           </div>
-          <hr className=" divider" />
+          <hr className="divider" />
 
           <div className="rightBar_data">
             <Image
@@ -90,7 +99,7 @@ const RightSideBar = ({ user }: { user: userTypeCard }) => {
               height={34}
               className="icon_style"
             />
-            <p className="font-medium text-lg">{posts} posts</p>
+            <p className="font-medium text-lg">{user?.totalPosts} posts</p>
           </div>
           <hr className="divider" />
 
@@ -102,7 +111,9 @@ const RightSideBar = ({ user }: { user: userTypeCard }) => {
               height={34}
               className="icon_style"
             />
-            <p className="font-medium text-lg">{views} total content views</p>
+            <p className="font-medium text-lg">
+              {user?.totalViews} total content views
+            </p>
           </div>
         </div>
       </div>
@@ -110,7 +121,4 @@ const RightSideBar = ({ user }: { user: userTypeCard }) => {
   );
 };
 
-{
-  /*convert the questions, answers, posts and views divs into links that would showcase the list of questions answers, posts and all posts(i.e all questions, answerd questions, and posts: in response to clicking the total content views link)*/
-}
 export default RightSideBar;

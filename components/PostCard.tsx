@@ -1,10 +1,13 @@
 import Link from "next/link";
-import Image from "next/image";
 import { formatDate } from "@/lib/utils";
 import PostCardFooter from "./PostCardFooter";
 import HoverCard from "./HoverCard";
 import ExpandableText from "./ExpandableText";
 import PostImage from "./PostImage";
+import { urlFor } from "@/sanity/lib/image";
+import { Author, Question } from "@/sanity/types";
+
+export type PostTypeCard = Omit<Question, "author"> & { author?: Author };
 
 const PostCard = ({ post }: { post: PostTypeCard }) => {
   const {
@@ -14,16 +17,16 @@ const PostCard = ({ post }: { post: PostTypeCard }) => {
     description,
     image,
     category,
-    title,
-    email,
+    topic,
   } = post;
+
   return (
     <li className="bg-gray-800 shadow-lg text-white w-full rounded-xl">
       <div className="flex items-center flex-row gap-2 justify-between p-3 max-sm:flex-col max-sm:justify-start">
         <div className="flex items-center gap-2">
           <Link href={`/user/${author?._id}`}>
             <HoverCard
-              src={author?.image!}
+              src={urlFor(author?.image!).url()}
               alt={author?.name!}
               width={65}
               height={65}
@@ -55,12 +58,13 @@ const PostCard = ({ post }: { post: PostTypeCard }) => {
       <div className="flex flex-col gap-2 ">
         <div className="p-2">
           <p className="font-bold flex text-2xl justify-start max-sm:text-sm">
-            {title}
+            {topic}
           </p>
+
           <ExpandableText description={description} />
         </div>
 
-        <PostImage image={image} />
+        <PostImage image={urlFor(image).url()} />
       </div>
       <PostCardFooter />
     </li>
