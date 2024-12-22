@@ -8,7 +8,7 @@ import React from "react";
 const RightSideBar = ({ user }: { user: Author }) => {
   return (
     <>
-      <div className="top-0 w-full bg-gray-800 h-auto rounded-xl flex flex-col justify-center border border-gray-700">
+      <div className="side_bar">
         <Link href={`/user/${user?._id}`}>
           {user?.backgroundImage ? (
             <img

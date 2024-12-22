@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import Header from "@/components/Header";
+import LeftSideBar from "@/components/LeftSideBar";
 import PostCard, { PostTypeCard } from "@/components/PostCard";
 import RightSideBar from "@/components/RightSideBar";
 import { client } from "@/sanity/lib/client";
@@ -25,7 +26,9 @@ const Home = async ({
   return (
     <>
       <div className="flex gap-6 text-white mt-7">
-        <div className="w-1/4 bg-gray-800 p-4"> Left Sidebar </div>
+        <section className="w-1/4 pl-9 max-lg:hidden ">
+          <LeftSideBar />
+        </section>
         <section className="w-1/2">
           <Header search={query} />
           <div className="w-full py-4 mx-auto ">

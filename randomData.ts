@@ -211,8 +211,17 @@ const AskPost = ({ title, image }: Props) => {
                       }) => (
                         <div>
                           <div className="relative w-full">
+                            <input
+                              type="file"
+                              className="absolute inset-0 w-full h-full bg-red-500 cursor-pointer"
+                              onChange={onImageUpload}
+                              {...dragProps}
+                              accept="image/*"
+                            />
                             <button
-                              className={`w-full min-h-52 bg-slate-900 border-2 border-slate-700 rounded-3xl text-lg px-5 flex flex-row items-center max-md:max-w-[400px] hover:bg-slate-700 justify-center mb-2 ${isDragging ? "bg-gray-400" : ""}`}
+                              className={`w-full min-h-40 bg-slate-900 border-2 border-slate-700 rounded-3xl text-lg px-5 flex flex-row items-center max-md:max-w-[400px] hover:bg-slate-700 justify-center mb-2 ${
+                                isDragging ? "bg-gray-400" : ""
+                              }`}
                               onClick={onImageUpload}
                               {...dragProps}
                             >

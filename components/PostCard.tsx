@@ -6,7 +6,6 @@ import ExpandableText from "./ExpandableText";
 import PostImage from "./PostImage";
 import { urlFor } from "@/sanity/lib/image";
 import { Author, Question } from "@/sanity/types";
-import View from "./Views";
 
 export type PostTypeCard = Omit<Question, "author"> & { author?: Author };
 
@@ -14,7 +13,7 @@ const PostCard = ({ post }: { post: PostTypeCard }) => {
   const {
     _createdAt,
     author,
-    _id, //id of the post
+    //id of the post
     description,
     image,
     category,
@@ -28,7 +27,7 @@ const PostCard = ({ post }: { post: PostTypeCard }) => {
           <Link href={`/user/${author?._id}`}>
             <HoverCard
               src={urlFor(author?.image!).url()}
-              alt={author?.name!}
+              alt={author?.name}
               width={65}
               height={65}
               post={post}
@@ -69,8 +68,6 @@ const PostCard = ({ post }: { post: PostTypeCard }) => {
       </div>
       <div className="mt-3">
         <PostCardFooter />
-        {/*         <View id={_id} />
-         */}{" "}
       </div>
     </li>
   );
