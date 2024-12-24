@@ -38,7 +38,7 @@ const Page = () => {
                 await signIn("google", { redirectTo: "/" });
               }}
             >
-              <button className="py-2 px-10 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-3xl text-white">
+              <button className="py-2 px-8 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-3xl text-white">
                 Login With Google
               </button>
             </form>
@@ -48,7 +48,7 @@ const Page = () => {
                 await signIn("github", { redirectTo: "/" });
               }}
             >
-              <button className="py-2 px-10 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-3xl text-white">
+              <button className="py-2 px-8 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-3xl text-white">
                 Login With Github
               </button>
             </form>
