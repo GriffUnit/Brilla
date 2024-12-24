@@ -6,7 +6,6 @@ import RightSideBar from "@/components/RightSideBar";
 import { client } from "@/sanity/lib/client";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { AUTHOR_BY_ID_QUERY, QUESTIONS_QUERY } from "@/sanity/lib/queries";
-import { Author } from "@/sanity/types";
 
 const Home = async ({
   searchParams,

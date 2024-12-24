@@ -6,7 +6,7 @@ export const QUESTIONS_QUERY = defineQuery(`*[_type == "question" && defined(slu
     slug, 
     _createdAt, 
     author -> {
-      _id, name, image, bio, email
+      _id, name, image, bio, email, totalViews, totalQuestions, totalAnswers, totalPosts
     }, 
     views, 
     description,  

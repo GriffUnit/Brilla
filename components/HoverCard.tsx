@@ -64,7 +64,7 @@ const HoverCard = ({ src, alt, width, height, post }: Props) => {
                   height={34}
                   className="icon_style"
                 />
-                <p className="hover_data">64 Questions</p>
+                <p className="hover_data">{author?.totalQuestions} Questions</p>
               </div>
               <div className="flex flex-row gap-2 items-center">
                 <Image
@@ -74,7 +74,7 @@ const HoverCard = ({ src, alt, width, height, post }: Props) => {
                   height={34}
                   className="icon_style"
                 />
-                <p className="hover_data">77 Answered</p>
+                <p className="hover_data">7{author?.totalAnswers} Answered</p>
               </div>
               <div className="flex flex-row gap-2 items-center">
                 <Image
@@ -84,7 +84,7 @@ const HoverCard = ({ src, alt, width, height, post }: Props) => {
                   height={34}
                   className="icon_style "
                 />
-                <p className="hover_data">21M content views</p>
+                <p className="hover_data">{author?.totalViews} content views</p>
               </div>
               <div className="flex flex-row gap-2 items-center">
                 <Image

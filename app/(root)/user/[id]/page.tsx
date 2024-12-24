@@ -92,7 +92,11 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
       </section>
 
-      <ul className="w-1/2 mt-10 flex relative left-1/2 transform -translate-x-1/2 space-y-7">
+      <ul className="w-1/2 mt-10 flex relative left-1/2 transform -translate-x-1/2 space-y-7 flex-col">
+        <p className="text-5xl font-bold text-white ">
+          {session?.id === id ? "Your" : "All"} Posts
+        </p>
+
         <Suspense
           fallback={
             <Skeleton className="bg-zinc-400 h-10 w-1/2 rounded-lg fixed bottom-3 right-3" />
