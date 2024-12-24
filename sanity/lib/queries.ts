@@ -33,3 +33,17 @@ export const AUTHOR_BY_ID_QUERY = defineQuery(`*[_type == 'author' && _id == $id
   totalPosts, 
   }`);
 
+  export const QUESTIONS_BY_AUTHOR_QUERY = defineQuery(`*[_type == "question" && author._ref == $id] | order(_createdAt desc) {
+     _id, 
+    topic, 
+    slug, 
+    _createdAt, 
+    author -> {
+      _id, name, image, bio, email
+    }, 
+    views, 
+    description,  
+    category, 
+    image
+    }`)
+

@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import PostCardFooter from "./PostCardFooter";
 import HoverCard from "./HoverCard";
 import ExpandableText from "./ExpandableText";
 import PostImage from "./PostImage";
 import { urlFor } from "@/sanity/lib/image";
 import { Author, Question } from "@/sanity/types";
+import { Skeleton } from "./ui/skeleton";
 
 export type PostTypeCard = Omit<Question, "author"> & { author?: Author };
 
@@ -72,5 +73,15 @@ const PostCard = ({ post }: { post: PostTypeCard }) => {
     </li>
   );
 };
+
+export const StartupCardSkeleton = () => (
+  <>
+    {[0, 1, 2, 3, 4].map((index: number) => (
+      <li key={cn("skeleton", index)}>
+        <Skeleton className="w-full h-96 rounded-[22px] bg-zinc-400" />
+      </li>
+    ))}
+  </>
+);
 
 export default PostCard;

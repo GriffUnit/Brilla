@@ -14,15 +14,7 @@ interface Props {
 
 const HoverCard = ({ src, alt, width, height, post }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
-  const {
-    _createdAt,
-    author, 
-    _id, //id of the post
-    description,
-    image,
-    category,
-    topic,
-  } = post;
+  const { author } = post;
 
   return (
     <div
@@ -40,7 +32,7 @@ const HoverCard = ({ src, alt, width, height, post }: Props) => {
       {isHovered && (
         <div className="hover:bg-black hover:bg-opacity-50 rounded-2xl absolute inset-0">
           <div className="flex flex-row max-md:flex-col bg-gradient-to-r from-red-800 to-gray-800 rounded-xl shadow-lg absolute right-0 border-2 border-gray-700 transform translate-x-10 translate-y-16 max-md:translate-y-10 gap-3 md:min-w-[500px] w-64 h-auto p-3">
-            <div className="flex h-auto select-none rounded-l-xl no-underline focus:shadow-md w-1/2">
+            <div className="flex h-auto select-none rounded-l-xl no-undline focus:shadow-md w-1/2">
               <Image
                 src={src}
                 alt={alt}
