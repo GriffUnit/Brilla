@@ -1,7 +1,6 @@
 import Image from "next/image";
 import classImage from "@/public/login_background.jpg";
-import { signIn } from "@/auth";
-
+import { signIn } from "next-auth/react";
 const Page = () => {
   return (
     <div className="relative w-full h-screen flex justify-center items-center bg-gradient-to-r from-purple-500 to-red-500">
@@ -35,20 +34,20 @@ const Page = () => {
             <form
               action={async () => {
                 "use server";
-                await signIn("google", { redirectTo: "/" });
+                await signIn("google", { callbackUrl: "/" });
               }}
             >
-              <button className="py-2 px-8 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-3xl text-white">
+              <button className="py-2 px-8 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-xl text-white">
                 Login With Google
               </button>
             </form>
             <form
               action={async () => {
                 "use server";
-                await signIn("github", { redirectTo: "/" });
+                await signIn("github", { callbackUrl: "/" });
               }}
             >
-              <button className="py-2 px-8 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-3xl text-white">
+              <button className="py-2 px-8 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-xl text-white">
                 Login With Github
               </button>
             </form>
