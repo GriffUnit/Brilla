@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { redirect } from 'next/dist/server/api-utils';
 
 const nextConfig: NextConfig = {
   typescript: {
@@ -16,8 +17,17 @@ ignoreBuildErrors: true
       },
     ],
   },
-};
-
+ /*  module.exports = {...nextConfig, async redirects() {
+    return [
+      {
+        source: '/old-route',
+        destination: '/new-route',
+        permanent: true,
+      },
+    ];
+  }
+}, */
+}
 export default nextConfig;
 
  /*  experimental: {

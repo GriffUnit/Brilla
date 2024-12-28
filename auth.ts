@@ -38,13 +38,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const user = await client.withConfig({useCdn: false}).fetch(AUTHOR_BY_ID_QUERY, {id: profile?.id});
 
         token.id = user?._id;
+        console.log('token.id:', token.id);
       }
 
       return token;
     },
 
     async session({session, token}) {
-      Object.assign(session, {id: token.id});
+      
+      session.id = token.id as string;
       return session;
     }
   }

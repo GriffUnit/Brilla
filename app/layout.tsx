@@ -29,9 +29,14 @@ export default async function RootLayout({
 }>) {
   const session = await auth();
 
-  if (!session) {
-    redirect("/login");
-  }
+  // Check if the current page is "/login" and skip the session check
+  /* if (typeof window !== "undefined") {
+    const pathname = window.location.pathname;
+    if (!session && pathname !== "/login") {
+      redirect("/login");
+    }
+  } */
+
   return (
     <html lang="en">
       <body
