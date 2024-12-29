@@ -37,7 +37,7 @@ const Page = () => {
                 await signIn("google", { callbackUrl: "/" });
               }}
             >
-              <button className="py-2 px-8 bg-gradient-to-r from-purple-500 to-red-500 hover:bg-white hover:bg-opacity-50 transition-transform transform hover:scale-105 rounded-2xl text-2xl text-white">
+              <button className="py-2 px-8 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-2xl text-white">
                 Login With Google
               </button>
             </form>
@@ -47,7 +47,7 @@ const Page = () => {
                 await signIn("github", { callbackUrl: "/" });
               }}
             >
-              <button className="py-2 px-8 bg-gradient-to-r from-purple-500 to-red-500 hover:bg-white hover:bg-opacity-50 transition-transform transform hover:scale-105 rounded-2xl text-2xl text-white">
+              <button className="py-2 px-8 bg-red-600 hover:bg-red-400 transition-transform transform hover:scale-105 rounded-2xl text-2xl text-white">
                 Login With Github
               </button>
             </form>
